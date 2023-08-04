@@ -252,26 +252,37 @@ const GithubRepos = () => {
   );
 };
 
-// export async function getServerSideProps() {
-//   try {
-//     const response = await axios.get(
-//       "https://api.github.com/users/IshanPhadte776/repos?sort=created&direction=desc"
-//     );
-//     console.log("Hello")
+export async function getServerSideProps() {
+  try {
+    const response = await axios.get("/api/repos"); // Call the API route directly
+    const repos = response.data;
+    return {
+      props: { repos },
+    };
+  } catch (error) {
+    console.error("Error fetching repositories:", error);
+    return {
+      props: { repos: [] }, // Return empty data or handle the error case as needed
+    };
+  }
+}
 
-//     const repos = response.data;
+// export async function getStaticProps() {
+//   // This code will be executed at build time
+//   console.log("Hello");
 
-//     console.log(repos)
-//     return {
-//       props: { repos },
-//     };
-//   } catch (error) {
-//     console.error("Error fetching repositories:", error);
-//     return {
-//       props: { repos: [] }, // Return empty data or handle the error case as needed
-//     };
-//   }
+//   const response = await fetch("/api/githubRepos");
+//   const data = await response.json();
+
+//   console.log(data);
+
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
 // }
+
 
 // GithubRepos.getInitialProps = async () => {
 //   try {

@@ -5,8 +5,26 @@ import GithubRepos from "./components/github/GitHubRepos";
 import GithubStats from "./components/github/GithubStats";
 import TechnologyUsed from "./components/technology/TechnologyUsed";
 import VerticalComponent from "./components/sideBar/VerticalComponent";
+import axios from "axios";
 
 import Hero from "./components/hero/Hero";
+
+export async function getServerSideProps() {
+  try {
+    console.log("Two")
+    const response = await axios.get("http://localhost:3000/api/repos"); // Use localhost with the port number
+    const repos = response.data;
+    return {
+      props: { repos },
+    };
+  } catch (error) {
+    console.error("Error fetching repositories:", error);
+    return {
+      props: { repos: [] }, // Return empty data or handle the error case as needed
+    };
+  }
+}
+
 
 export default function Home() {
   const [language, setLanguage] = useState("English");
@@ -90,7 +108,6 @@ export default function Home() {
           >
             &#9650;
           </span>
-          <GithubRepos />
 
               <TechnologyUsed language={language} />
 

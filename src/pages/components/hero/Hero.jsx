@@ -9,7 +9,6 @@ function Hero() {
   useEffect(() => {
     const handleMediaQueryChange = (event) => {
       if (event.matches) {
-        console.log("Screen size changed:", screenSize, "to", event.media);
         setScreenSize(event.media);
       }
     };
