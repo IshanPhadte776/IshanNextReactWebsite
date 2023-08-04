@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Header.module.css";
-import jumpingLogo from "./images/ishanLogo.png";
 import emailIcon from "./images/email.png";
 import Image from "next/image";
 
@@ -13,7 +12,6 @@ const Header = (props) => {
       className={`${styles.jump} w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-18 xl:h-18 2xl:w-20 2xl:h-20 3xl:w-22 3xl:h-22 4xl:w-24 4xl:h-24`}
     >
       {/* Sets Width and Height to different values based on breakpoints */}
-      <Image src={jumpingLogo} alt="Logo" />
     </div>
     <h1 className="text-base lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl lg:min-w-lg xl:min-w-xl 2xl:min-w-2xl 3xl:min-w-3xl 4xl:min-w-4xl font-bold">
       Ishan Phadte
