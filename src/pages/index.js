@@ -43,6 +43,7 @@ export async function getStaticProps() {
 export default function Home({repos}) {
   const [language, setLanguage] = useState("English");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const scrollToTop = () => {
     const scrollDuration = 500; // Duration of the scroll animation in milliseconds
@@ -87,6 +88,16 @@ export default function Home({repos}) {
     };
   }, []);
 
+
+  useEffect(() => {
+    // Simulate loading delay for demonstration purposes
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <Head>
@@ -109,7 +120,11 @@ export default function Home({repos}) {
             >
               &#9650;
             </span>
-            <GithubRepos repos = {repos}></GithubRepos>
+            {!loading ? (
+              <GithubRepos repos={repos} />
+            ) : (
+              <p>Loading repositories...</p>
+            )}
             <TechnologyUsed language={language}></TechnologyUsed>
           </div>
         </div>
