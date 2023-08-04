@@ -21,15 +21,19 @@ const GithubRepos = (props) => {
   const [highlightedLanguage, setHighlightedLanguage] = useState("");
   const [numOfProjects, setNumOfProjects] = useState("");
 
+  const [hoveredRepo, setHoveredRepo] = useState(null);
+
+  if (repos === null) {
+    return <div>Loading repositories...</div>;
+  }
+  
   const convertDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: "numeric", month: "long", day: "numeric" };
     return date.toLocaleDateString("en-US", options);
   };
 
-  if (repos === null) {
-    return <div>Loading repositories...</div>;
-  }
+
 
   // const fetchRepos = async () => {
   //   try {
@@ -118,7 +122,6 @@ const GithubRepos = (props) => {
     setNumOfProjects(data.find((item) => item.label === language).value);
   };
 
-  const [hoveredRepo, setHoveredRepo] = useState(null);
 
   const handleMouseEnter = (repoId) => {
     setHoveredRepo(repoId);
