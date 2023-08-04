@@ -4,6 +4,7 @@ import axios from "axios";
 import PieChart from "./PieChart";
 import GithubStats from "./GithubStats";
 
+
 const GithubRepos = () => {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -40,6 +41,8 @@ const GithubRepos = () => {
   useEffect(() => {
     fetchRepos();
   }, []);
+
+  
 
   const toggleVisibility = () => {
     setExpanded(!expanded);
@@ -233,5 +236,41 @@ const GithubRepos = () => {
     </div>
   );
 };
+
+// export async function getServerSideProps() {
+//   try {
+//     const response = await axios.get(
+//       "https://api.github.com/users/IshanPhadte776/repos?sort=created&direction=desc"
+//     );
+//     console.log("Hello")
+
+//     const repos = response.data;
+
+//     console.log(repos)
+//     return {
+//       props: { repos },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching repositories:", error);
+//     return {
+//       props: { repos: [] }, // Return empty data or handle the error case as needed
+//     };
+//   }
+// }
+
+// GithubRepos.getInitialProps = async () => {
+//   try {
+//     const response = await axios.get(
+//       "https://api.github.com/users/IshanPhadte776/repos?sort=created&direction=desc"
+//     );
+//     const data = response.data;
+//     console.log(data)
+//     return { data };
+//   } catch (error) {
+//     console.error("Error fetching repositories:", error);
+//     return { data: [] }; // Return empty data or handle the error case as needed
+//   }
+// };
+
 
 export default GithubRepos;
