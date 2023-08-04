@@ -1,34 +1,13 @@
-import React, { useEffect, useState, useReducer  } from "react";
+import React, { useEffect, useState  } from "react";
 import axios from "axios";
 
 import PieChart from "./PieChart";
 import GithubStats from "./GithubStats";
 
-const initialState = {
-  loading: true,
-  repos: [],
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "FETCH_SUCCESS":
-      return {
-        loading: false,
-        repos: action.payload,
-      };
-    case "FETCH_ERROR":
-      return {
-        loading: false,
-        repos: [],
-      };
-    default:
-      return state;
-  }
-};
 
 const GithubRepos = () => {
-  // const [repos, setRepos] = useState([]);
-  // const [loading, setLoading] = useState(false);
+   const [repos, setRepos] = useState([]);
+   const [loading, setLoading] = useState(false);
 
   const [expanded, setExpanded] = useState(false);
   const [searchLanguage, setSearchLanguage] = useState("");
@@ -63,25 +42,20 @@ const GithubRepos = () => {
   //   fetchRepos();
   // }, []);
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
   useEffect(() => {
-    const fetchRepos = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://api.github.com/users/IshanPhadte776/repos?sort=created&direction=desc"
-        );
-        dispatch({ type: "FETCH_SUCCESS", payload: response.data });
+        setLoading(true);
+        const response = await axios.get("/api/repos");
+        setRepos(response.data);
       } catch (error) {
         console.error("Error fetching repositories:", error);
-        dispatch({ type: "FETCH_ERROR" });
+      } finally {
+        setLoading(false);
       }
     };
-
-    fetchRepos();
+    fetchData();
   }, []);
-
-  const { loading, repos } = state;
 
   
 

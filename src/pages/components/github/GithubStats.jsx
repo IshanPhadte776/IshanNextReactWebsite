@@ -39,7 +39,6 @@ const GithubStats = () => {
         <li>Created On: {convertDate(stats.created_at)}</li>
         <li>Followers: {stats.followers}</li>
         <li>Repositories: {stats.public_repos}</li>
-        {/* Add more stats as needed */}
       </ul>
     </div>
   );
