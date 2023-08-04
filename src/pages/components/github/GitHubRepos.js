@@ -5,9 +5,12 @@ import PieChart from "./PieChart";
 import GithubStats from "./GithubStats";
 
 
-const GithubRepos = () => {
-   const [repos, setRepos] = useState([]);
+const GithubRepos = (props) => {
+   //const [repos, setRepos] = useState([]);
    const [loading, setLoading] = useState(false);
+
+   const { repos } = props;
+
 
   const [expanded, setExpanded] = useState(false);
   const [searchLanguage, setSearchLanguage] = useState("");
@@ -42,20 +45,20 @@ const GithubRepos = () => {
   //   fetchRepos();
   // }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get("/api/repos");
-        setRepos(response.data);
-      } catch (error) {
-        console.error("Error fetching repositories:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await axios.get("/api/repos");
+  //       setRepos(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching repositories:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   
 
@@ -252,20 +255,20 @@ const GithubRepos = () => {
   );
 };
 
-export async function getServerSideProps() {
-  try {
-    const response = await axios.get("/api/repos"); // Call the API route directly
-    const repos = response.data;
-    return {
-      props: { repos },
-    };
-  } catch (error) {
-    console.error("Error fetching repositories:", error);
-    return {
-      props: { repos: [] }, // Return empty data or handle the error case as needed
-    };
-  }
-}
+// export async function getServerSideProps() {
+//   try {
+//     const response = await axios.get("/api/repos"); // Call the API route directly
+//     const repos = response.data;
+//     return {
+//       props: { repos },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching repositories:", error);
+//     return {
+//       props: { repos: [] }, // Return empty data or handle the error case as needed
+//     };
+//   }
+// }
 
 // export async function getStaticProps() {
 //   // This code will be executed at build time

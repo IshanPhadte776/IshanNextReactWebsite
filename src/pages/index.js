@@ -26,7 +26,7 @@ export async function getServerSideProps() {
 }
 
 
-export default function Home() {
+export default function Home({ repos }) {
   const [language, setLanguage] = useState("English");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -95,7 +95,7 @@ export default function Home() {
             >
               &#9650;
             </span>
-            <GithubRepos></GithubRepos>
+            <GithubRepos repos = {repos}></GithubRepos>
             <TechnologyUsed language={language}></TechnologyUsed>
           </div>
         </div>
