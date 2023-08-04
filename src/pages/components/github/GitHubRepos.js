@@ -23,10 +23,10 @@ const GithubRepos = (props) => {
 
   const [hoveredRepo, setHoveredRepo] = useState(null);
 
-  if (repos === null) {
+  if (!Array.isArray(repos)) {
     return <div>Loading repositories...</div>;
   }
-  
+
   const convertDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: "numeric", month: "long", day: "numeric" };
