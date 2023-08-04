@@ -1,0 +1,35 @@
+.chartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  
+  .chart {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    transform: rotate(-90deg);
+  }
+  
+  .slice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100
+  }
+
+  .arrowLine {
+    fill: none;
+    stroke: #000;
+    stroke-width: 0.5;
+    stroke-dasharray: 3;
+  }
+  
+  .arrowTriangle {
+    fill: #000;
+  }

@@ -1,0 +1,46 @@
+.curvedBox {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+
+.languageFilter {
+    margin-bottom: 10px;
+  }
+  
+  .filterButton {
+    margin-right: 10px;
+  }
+  
+  .expandButton {
+    margin-bottom: 10px;
+  }
+  
+  .repoList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .repoItem {
+    margin-bottom: 20px;
+  }
+  
+  .repoLink {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .repoName {
+    font-weight: bold;
+  }
+  
+  .loadingMessage {
+    margin-top: 20px;
+  }
+  
+  .noMatchingRepos {
+    margin-top: 20px;
+    color: red;
+  }
+  

@@ -1,0 +1,38 @@
+
+
+
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px; /* Adjust the value as needed */
+}
+
+.headerText {
+  font-family: cursive;
+}
+
+.jump {
+  animation: jump 1s ease-in-out infinite;
+  transform-origin: center top;
+  animation-duration: 2s; /* Slow down the animation */
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  25% {
+    transform: translateY(-10px) scaleY(0.95);
+  }
+  50% {
+    transform: translateY(0) scaleY(1);
+  }
+  75% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+}
+
