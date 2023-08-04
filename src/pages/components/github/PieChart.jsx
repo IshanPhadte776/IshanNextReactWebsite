@@ -23,13 +23,14 @@ const PieChart = ({ data, onSliceHover }) => {
     setPrevHoveredSlice(hoveredSlice);
     setHoveredSlice(null);
   };
+  
 
-  if (data === null) {
-    return <div>No data available</div>;
-  }
+  // if (data === null) {
+  //   return <div>No data available</div>;
+  // }
 
   return (
-<div className="pie-chart-container">
+    data !== null ?( <div className="pie-chart-container">
       <svg className="pie-chart-svg  " viewBox="0 0 100 100">
         {data.map((item, index) => {
           const percentage =
@@ -106,7 +107,9 @@ const PieChart = ({ data, onSliceHover }) => {
       </svg>
 
     </div>
-  );
+
+    ): null
+    );
 };
 
 export default PieChart;
