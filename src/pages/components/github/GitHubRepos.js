@@ -27,6 +27,10 @@ const GithubRepos = (props) => {
     return date.toLocaleDateString("en-US", options);
   };
 
+  if (repos === null) {
+    return <div>Loading repositories...</div>;
+  }
+
   // const fetchRepos = async () => {
   //   try {
   //     setLoading(true);
@@ -159,6 +163,9 @@ const GithubRepos = (props) => {
         });
         return capitalizedWords.join(" ");
       }
+
+
+
       
 
   return (

@@ -24,6 +24,10 @@ const PieChart = ({ data, onSliceHover }) => {
     setHoveredSlice(null);
   };
 
+  if (data === null) {
+    return <div>No data available</div>;
+  }
+
   return (
 <div className="pie-chart-container">
       <svg className="pie-chart-svg  " viewBox="0 0 100 100">

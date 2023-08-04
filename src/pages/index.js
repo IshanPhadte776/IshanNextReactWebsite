@@ -93,7 +93,7 @@ export default function Home({repos}) {
     // Simulate loading delay for demonstration purposes
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 10000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
