@@ -23,6 +23,10 @@ const PieChart = ({ data, onSliceHover }) => {
     setPrevHoveredSlice(hoveredSlice);
     setHoveredSlice(null);
   };
+
+  if (!Array.isArray(data)) {
+    return <div>No data available</div>;
+  }
   
 
   // if (data === null) {
