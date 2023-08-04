@@ -11,7 +11,7 @@ import Hero from "./components/hero/Hero";
 export async function getServerSideProps() {
   try {
     console.log("SSP")
-    const response = await axios.get("http://localhost:3000/api/repos"); // Use localhost with the port number
+    const response = await axios.get("https://api.github.com/users/IshanPhadte776/repos?sort=created&direction=desc"); // Use localhost with the port number
     const repos = response.data;
     return {
       props: { repos },
