@@ -1,0 +1,29 @@
+apiVersion: apps/v1  # Specifies the API version for the Deployment resource.
+kind: Deployment  # Defines the type of resource being created, which is a Deployment.
+
+metadata:  # Metadata section contains information about the resource.
+  name: personal-next-website  # Specifies the name of the Deployment.
+
+spec:  # Spec section describes the desired state of the Deployment.
+  replicas: 3  # Specifies the desired number of replicas (pods) to maintain.
+  # The Deployment will manage 3 instances of your application.
+
+  selector:  # Selector is used to match pods controlled by this Deployment.
+    matchLabels:  # Specifies labels used for selecting pods.
+      app: personal-next-website  # Matches pods with the label "app: personal-next-website".
+    
+  template:  # Template defines the pod template used to create replicas.
+    metadata:  # Metadata for the pod template.
+      labels:  # Labels applied to pods created from this template.
+        app: personal-next-website  # Label "app: personal-next-website" is applied.
+
+    spec:  # Pod specification.
+      containers:  # Specifies the containers within the pod.
+        - name: nextjs-container  # Specifies the name of the container.
+
+          image: ishanphadte/myreactwebsite:latest  # Specifies the Docker image to use.
+          # "ishanphadte/myreactwebsite" is the repository, ":latest" is the tag.
+
+          ports:  # Specifies ports for the container.
+            - containerPort: 3000  # Container is listening on port 3000.
+            # Traffic sent to this port will be directed to the container.
