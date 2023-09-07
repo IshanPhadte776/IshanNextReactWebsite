@@ -1,15 +1,14 @@
 pipeline {
     agent {
-        label 'docker'
+        docker {
+            image 'node:18.17.1-alpine3.18' 
+            args '-p 3000:3000' 
+        }
     }
     stages {
-        stage('Build') {
+        stage('Build') { 
             steps {
-                script {
-                    docker.image('node:18.17.1-alpine3.18').inside('-p 3000:3000') {
-                        sh 'npm install'
-                    }
-                }
+                sh 'npm install' 
             }
         }
     }
