@@ -5,6 +5,7 @@ pipeline {
     //These are the stages 
     stages {
         //This is the stage
+        //These names are user made, 
         stage('Build') { 
             //For this stage, use npm install and install the dependencies
             steps {
@@ -19,7 +20,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                sh 'npm install' 
             }
         }
     }
