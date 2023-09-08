@@ -2,6 +2,11 @@ pipeline {
     //any agent or worker can be used
     agent any
 
+    tools {
+        // Define the Node.js installation to use
+        nodejs 'Node.js 20.6'
+    }
+
     //These are the stages 
     stages {
         //This is the stage
