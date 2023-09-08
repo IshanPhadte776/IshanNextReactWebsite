@@ -11,7 +11,16 @@ pipeline {
     //These are the stages 
     stages {
         //This is the stage
-        //These names are user made, 
+        //These names are user made,
+
+        stage('Set NPM Registry') {
+            steps {
+                script {
+                    // Set the npm registry to use a mirror
+                    sh 'npm config set registry https://registry.npmjs.org/'
+                }
+            }
+        } 
 
         stage('Build') {
             // For this stage, use npm install to install dependencies
@@ -30,9 +39,12 @@ pipeline {
             }
         }
 
+
+
         stage('Install Vercel CLI') {
             steps {
                 // Download and install the Vercel CLI
+                
                 sh 'npm install -g vercel'
             }
         }
