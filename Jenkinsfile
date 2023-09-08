@@ -7,6 +7,14 @@ pipeline {
         //This is the stage
         //These names are user made, 
 
+        stage('Check Node.js Version') {
+            steps {
+                script {
+                    def nodeVersion = sh(script: 'node -v', returnStdout: true).trim()
+                    echo "Node.js version being used: ${nodeVersion}"
+                }
+            }
+        }
 
         stage('Build') {
             // For this stage, use npm install to install dependencies
