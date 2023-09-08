@@ -7,12 +7,6 @@ pipeline {
         //This is the stage
         //These names are user made, 
 
-        stage('Test') {
-            steps {
-                sh 'npm test' 
-            }
-        }
-
 
         stage('Build') {
             // For this stage, use npm install to install dependencies
@@ -25,6 +19,11 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh 'npm test' 
+            }
+        }
 
 
         stage('Deploy') {
