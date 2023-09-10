@@ -6,7 +6,10 @@ pipeline {
         // Define the Node.js installation to use
         nodejs 'Node.js 20.6'
     }
-
+    
+    environment {
+        NPM_CONFIG_PREFIX = "${env.WORKSPACE}/npm_global"
+    }
 
     //These are the stages 
     stages {
@@ -25,6 +28,7 @@ pipeline {
         stage('Build') {
             // For this stage, use npm install to install dependencies
             steps {
+                sh "npm config set prefix ${env.NPM_CONFIG_PREFIX}"
                 sh 'npm install'
                 dir('build') {
                     // Inside the 'build' directory, run the build script
