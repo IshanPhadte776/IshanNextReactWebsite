@@ -81,7 +81,7 @@ pipeline {
                     def loginMethod = "github" // Use "github" for GitHub login
 
                     // Run vercel login with the chosen login method
-                    sh "${vercelExecutable} login ${loginMethod}
+                    sh "${vercelExecutable} login --auth ${loginMethod}"
 
                     // Deploy using the full path to vercel executable
                     sh "${vercelExecutable} --prod"
