@@ -47,70 +47,70 @@ pipeline {
             steps {
                 // Download and install the Vercel CLI globally
                 sh 'npm install vercel'
-                // script {
-                //     def vercelVersion = sh(script: 'vercel --version', returnStdout: true).trim()
-                //     echo "Vercel CLI Version: ${vercelVersion}"
-                // }
-            }
-        }
-
-        stage('Check Vercel Installation Path') {
-            steps {
                 script {
-                    // Use 'npm list -g' to list global npm packages and capture the output
-                    def npmListOutput = sh(script: 'npm list -g', returnStdout: true).trim()
-
-                    // Find the line containing the Vercel package
-                    def vercelPackageLine = npmListOutput =~ /vercel/
-
-                    if (vercelPackageLine) {
-                        // Extract the directory path from the line (usually located at the beginning)
-                        def vercelPath = vercelPackageLine[0].replaceAll(/.*\s(.*)/, '$1')
-
-                        // Echo the result to the console
-                        echo "Vercel executable path: ${vercelPath}"
-                    } else {
-                        error('Vercel is not installed. Please install it.')
-                    }
+                    def vercelVersion = sh(script: 'vercel --version', returnStdout: true).trim()
+                    echo "Vercel CLI Version: ${vercelVersion}"
                 }
             }
         }
 
+        // stage('Check Vercel Installation Path') {
+        //     steps {
+        //         script {
+        //             // Use 'npm list -g' to list global npm packages and capture the output
+        //             def npmListOutput = sh(script: 'npm list -g', returnStdout: true).trim()
+
+        //             // Find the line containing the Vercel package
+        //             def vercelPackageLine = npmListOutput =~ /vercel/
+
+        //             if (vercelPackageLine) {
+        //                 // Extract the directory path from the line (usually located at the beginning)
+        //                 def vercelPath = vercelPackageLine[0].replaceAll(/.*\s(.*)/, '$1')
+
+        //                 // Echo the result to the console
+        //                 echo "Vercel executable path: ${vercelPath}"
+        //             } else {
+        //                 error('Vercel is not installed. Please install it.')
+        //             }
+        //         }
+        //     }
+        // }
 
 
 
 
-        stage('Check Version') {
-            steps {
-                script {
-                    // Find the full path to the vercel executable
-                    def vercelPath = sh(script: 'which vercel 2>&1', returnStdout: true).trim()
+
+        // stage('Check Version') {
+        //     steps {
+        //         script {
+        //             // Find the full path to the vercel executable
+        //             def vercelPath = sh(script: 'which vercel 2>&1', returnStdout: true).trim()
                     
-                    // Echo the result to the console
-                    echo "Vercel executable path: ${vercelPath}"
+        //             // Echo the result to the console
+        //             echo "Vercel executable path: ${vercelPath}"
 
 
-                }
+        //         }
 
-                sh 'vercel --version'
+        //         sh 'vercel --version'
 
-            }
-        }
+        //     }
+        // }
 
-        stage('Check Vercel Installation') {
-            steps {
-                script {
-                    def vercelInstalled = sh(script: 'command -v vercel', returnStatus: true)
+        // stage('Check Vercel Installation') {
+        //     steps {
+        //         script {
+        //             def vercelInstalled = sh(script: 'command -v vercel', returnStatus: true)
                     
-                    if (vercelInstalled == 0) {
-                        echo 'Vercel is installed.'
-                        // Your further steps for Vercel
-                    } else {
-                        error('Vercel is not installed. Please install it.')
-                    }
-                }
-            }
-        }
+        //             if (vercelInstalled == 0) {
+        //                 echo 'Vercel is installed.'
+        //                 // Your further steps for Vercel
+        //             } else {
+        //                 error('Vercel is not installed. Please install it.')
+        //             }
+        //         }
+        //     }
+        // }
 
 
         stage('Deploy') {
