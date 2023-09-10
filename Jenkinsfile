@@ -86,10 +86,12 @@ pipeline {
             steps {
                 script {
                     // Find the full path to the vercel executable
-                    def vercelPath = sh(script: 'which vercel', returnStdout: true).trim()
+                    def vercelPath = sh(script: 'which vercel 2>&1', returnStdout: true).trim()
                     
                     // Echo the result to the console
                     echo "Vercel executable path: ${vercelPath}"
+
+
                 }
 
                 sh 'vercel --version'
