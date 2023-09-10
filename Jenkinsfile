@@ -131,13 +131,22 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deployment..'
-                sh 'vercel login -t igHWhnWeM2XGycsZD29ttMf4'
-                sh 'vercel --prod'
+
+                // Specify the full path to the vercel executable
+                def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
+
+                // Log in to Vercel using the full path to vercel executable
+                sh "${vercelExecutable} login -t igHWhnWeM2XGycsZD29ttMf4"
+
+                // Deploy using the full path to vercel executable
+                sh "${vercelExecutable} --prod"
+
                 script {
-                   def deploymentUrl = sh(script: 'get-deployment-url-command', returnStdout: true).trim()
+                    def deploymentUrl = sh(script: 'get-deployment-url-command', returnStdout: true).trim()
                     echo "Deployment URL: ${deploymentUrl}"
                 }
             }
         }
+
     }
 }
