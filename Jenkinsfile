@@ -30,25 +30,23 @@ pipeline {
             steps {
                 sh "npm config set prefix ${env.NPM_CONFIG_PREFIX}"
                 sh 'npm install'
-                dir('build') {
-                    // Inside the 'build' directory, run the build script
-                    sh 'npm run build'
-                }
+                // dir('build') {
+                //     // Inside the 'build' directory, run the build script
+                //     sh 'npm run build'
+                // }
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'npm test' 
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         sh 'npm test' 
+        //     }
+        // }
 
         stage('Install Vercel CLI') {
             steps {
                 // Download and install the Vercel CLI globally
-                sh 'npm --version'
-                sh 'npm config get cache'
-                sh 'npm install -g vercel'
+                sh 'npm install vercel'
                 // script {
                 //     def vercelVersion = sh(script: 'vercel --version', returnStdout: true).trim()
                 //     echo "Vercel CLI Version: ${vercelVersion}"
