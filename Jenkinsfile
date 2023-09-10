@@ -45,12 +45,23 @@ pipeline {
 
         stage('Install Vercel CLI') {
             steps {
-                // Download and install the Vercel CLI
-                
+                // Download and install the Vercel CLI globally
                 sh 'npm install -g vercel'
+                script {
 
+                    // Use 'npm bin' to find the directory where global npm packages are installed
+                    def npmBinDirectory = sh(script: 'npm bin -g', returnStdout: true).trim()
+
+                    // Construct the full path to the Vercel CLI executable
+                    def vercelPath = "${npmBinDirectory}/vercel"
+
+                    // Echo the result to the console
+                    echo "Vercel executable path: ${vercelPath}"
+
+                }
             }
         }
+
 
 
 
