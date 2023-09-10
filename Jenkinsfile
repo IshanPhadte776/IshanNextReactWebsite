@@ -52,7 +52,7 @@ pipeline {
         stage('Check Vercel Installation') {
             steps {
                 script {
-                    def vercelInstalled = sh(script: 'command -v vercel', returnStatus: true)
+                    def installResult = sh(script: 'npm install vercel 2>&1 | tee vercel_installation.log', returnStatus: true)
                     
                     if (vercelInstalled == 0) {
                         echo 'Vercel is installed.'
