@@ -49,6 +49,21 @@ pipeline {
             }
         }
 
+        stage('Check Vercel Installation') {
+            steps {
+                script {
+                    def vercelInstalled = sh(script: 'command -v vercel', returnStatus: true)
+                    
+                    if (vercelInstalled == 0) {
+                        echo 'Vercel is installed.'
+                        // Your further steps for Vercel
+                    } else {
+                        error('Vercel is not installed. Please install it.')
+                    }
+                }
+            }
+        }
+
 
         stage('Deploy') {
             steps {
