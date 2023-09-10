@@ -58,11 +58,15 @@ pipeline {
                     // Construct the full path to the Vercel CLI executable
                     def vercelPath = "${installDirectory}/bin/vercel"
 
+                    // Use the sh step to execute 'vercel --version' and capture its output
+                    def vercelVersion = sh(script: "${vercelPath} --version", returnStdout: true).trim()
+
                     // Echo the result to the console
-                    echo "Vercel CLI Version: $(vercel --version)"  // Note the use of $(vercel --version)
+                    echo "Vercel CLI Version: ${vercelVersion}"
                 }
             }
         }
+
 
 
         // stage('Check Vercel Installation Path') {
