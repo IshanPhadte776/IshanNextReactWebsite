@@ -45,7 +45,6 @@ pipeline {
             steps {
                 // Download and install the Vercel CLI
                 
-                sh 'npm install -g vercel'
                 sh 'vercel --version'
 
             }
