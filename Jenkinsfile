@@ -45,9 +45,7 @@ pipeline {
             steps {
                 // Download and install the Vercel CLI
                 
-                sh 'npm install vercel'
-                // Set the PATH to include the location of the Vercel CLI
-                env.PATH = "/usr/local/bin:$env.PATH"
+                sh 'npm install -g vercel'
                 sh 'vercel --version'
 
             }
