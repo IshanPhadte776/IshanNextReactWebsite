@@ -54,14 +54,16 @@ pipeline {
 
 
 
-        stage('Install Vercel CLI') {
+        stage('Check Version') {
             steps {
+                script {
+                    // Find the full path to the vercel executable
+                    def vercelPath = sh(script: 'which vercel', returnStdout: true).trim()
+                    
+                    // Echo the result to the console
+                    echo "Vercel executable path: ${vercelPath}"
+                }
 
-                // Find the full path to the vercel executable
-                def vercelPath = sh(script: 'which vercel', returnStdout: true).trim()
-
-                // Echo the result to the console
-                echo "Vercel executable path: ${vercelPath}"
                 sh 'vercel --version'
 
             }
