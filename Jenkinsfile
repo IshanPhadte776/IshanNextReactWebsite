@@ -78,7 +78,7 @@ pipeline {
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
 
                     // Log in to Vercel using the full path to vercel executable
-                    sh "${vercelExecutable} login -t igHWhnWeM2XGycsZD29ttMf4"
+                    sh "${vercelExecutable} login"
 
                     // Deploy using the full path to vercel executable
                     sh "${vercelExecutable} --prod"
