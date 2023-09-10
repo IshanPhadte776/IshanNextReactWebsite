@@ -45,14 +45,14 @@ pipeline {
             steps {
                 // Download and install the Vercel CLI
                 
-                sh 'npm install vercel'
+                sh 'npm install -g vercel'
             }
         }
 
         stage('Check Vercel Installation') {
             steps {
                 script {
-                    def installResult = sh(script: 'npm install vercel 2>&1 | tee vercel_installation.log', returnStatus: true)
+                    def vercelInstalled = sh(script: 'command -v vercel', returnStatus: true)
                     
                     if (vercelInstalled == 0) {
                         echo 'Vercel is installed.'
