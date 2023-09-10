@@ -49,12 +49,35 @@ pipeline {
                 sh 'npm --version'
                 sh 'npm config get cache'
                 sh 'npm install -g vercel'
+                // script {
+                //     def vercelVersion = sh(script: 'vercel --version', returnStdout: true).trim()
+                //     echo "Vercel CLI Version: ${vercelVersion}"
+                // }
+            }
+        }
+
+        stage('Check Vercel Installation Path') {
+            steps {
                 script {
-                    def vercelVersion = sh(script: 'vercel --version', returnStdout: true).trim()
-                    echo "Vercel CLI Version: ${vercelVersion}"
+                    // Use 'npm list -g' to list global npm packages and capture the output
+                    def npmListOutput = sh(script: 'npm list -g', returnStdout: true).trim()
+
+                    // Find the line containing the Vercel package
+                    def vercelPackageLine = npmListOutput =~ /vercel/
+
+                    if (vercelPackageLine) {
+                        // Extract the directory path from the line (usually located at the beginning)
+                        def vercelPath = vercelPackageLine[0].replaceAll(/.*\s(.*)/, '$1')
+
+                        // Echo the result to the console
+                        echo "Vercel executable path: ${vercelPath}"
+                    } else {
+                        error('Vercel is not installed. Please install it.')
+                    }
                 }
             }
         }
+
 
 
 
