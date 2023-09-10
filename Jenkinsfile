@@ -52,10 +52,8 @@ pipeline {
                 sh 'npm install -g vercel'
 
                 // Find the full path to the vercel executable
-                def vercelExecutable = sh(script: 'which vercel', returnStdout: true).trim()
+                sh 'which vercel'
 
-                // Print the path to the vercel executable
-                echo "Full path to vercel executable: ${vercelExecutable}"
                 sh 'vercel --version'
 
             }
