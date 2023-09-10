@@ -80,8 +80,16 @@ pipeline {
                     // Set the environment variable to choose GitHub login method
                     def loginMethod = "github" // Use "github" for GitHub login
 
-                    // Run vercel login with the chosen login method
-                    sh "${vercelExecutable} login --auth ${loginMethod}"
+                    // Create an Expect script
+                    def expectScript = """
+                        spawn ${vercelExecutable} login
+                        expect "Log in to Vercel"
+                        send "${loginMethod}\\r"
+                        expect eof
+                    """
+
+                    // Run the Expect script
+                    sh "expect -c '${expectScript}'"
 
                     // Deploy using the full path to vercel executable
                     sh "${vercelExecutable} --prod"
