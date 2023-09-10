@@ -43,20 +43,26 @@ pipeline {
             }
         }
 
-
-
         stage('Install Vercel CLI') {
             steps {
                 // Download and install the Vercel CLI
                 
                 sh 'npm install -g vercel'
 
+            }
+        }
+
+
+
+        stage('Install Vercel CLI') {
+            steps {
+
                 // Find the full path to the vercel executable
                 def vercelPath = sh(script: 'which vercel', returnStdout: true).trim()
 
                 // Echo the result to the console
                 echo "Vercel executable path: ${vercelPath}"
-                //sh 'vercel --version'
+                sh 'vercel --version'
 
             }
         }
