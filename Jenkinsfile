@@ -56,7 +56,7 @@ pipeline {
 
                 // Echo the result to the console
                 echo "Vercel executable path: ${vercelPath}"
-                sh 'vercel --version'
+                //sh 'vercel --version'
 
             }
         }
