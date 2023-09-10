@@ -77,8 +77,11 @@ pipeline {
                     // Specify the full path to the vercel executable
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
 
-                    // Log in to Vercel using the full path to vercel executable
-                    sh "${vercelExecutable} login"
+                    // Set the environment variable to choose GitHub login method
+                    def loginMethod = "github" // Use "github" for GitHub login
+
+                    // Run vercel login with the chosen login method
+                    sh "${vercelExecutable} login ${loginMethod}
 
                     // Deploy using the full path to vercel executable
                     sh "${vercelExecutable} --prod"
