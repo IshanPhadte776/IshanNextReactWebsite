@@ -45,14 +45,25 @@ pipeline {
 
         stage('Install Vercel CLI') {
             steps {
-                // Download and install the Vercel CLI globally
-                sh 'npm install vercel'
                 script {
-                    def vercelVersion = sh(script: 'vercel --version', returnStdout: true).trim()
-                    echo "Vercel CLI Version: ${vercelVersion}"
+                    // Specify the installation directory
+                    def installDirectory = "${env.WORKSPACE}/vercel-install"
+
+                    // Create the installation directory if it doesn't exist
+                    sh "mkdir -p ${installDirectory}"
+
+                    // Download and install the Vercel CLI in the specified directory
+                    sh "npm install -g vercel --prefix ${installDirectory}"
+
+                    // Construct the full path to the Vercel CLI executable
+                    def vercelPath = "${installDirectory}/bin/vercel"
+
+                    // Echo the result to the console
+                    echo "Vercel CLI Version: $(vercel --version)"  // Note the use of $(vercel --version)
                 }
             }
         }
+
 
         // stage('Check Vercel Installation Path') {
         //     steps {
