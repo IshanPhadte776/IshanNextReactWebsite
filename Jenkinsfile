@@ -96,11 +96,11 @@ pipeline {
 
                 script {
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
-                        
-                    // Define the VERCEL_TOKEN variable within the script block
-                    def VERCEL_TOKEN = credentials('igHWhnWeM2XGycsZD29ttMf4')
-
-                    sh "${vercelExecutable} --token ${VERCEL_TOKEN} --prod"
+                    
+                    // Use the withCredentials step to inject the VERCEL_TOKEN as an environment variable
+                    withCredentials([string(credentialsId: 'igHWhnWeM2XGycsZD29ttMf4', variable: 'VERCEL_TOKEN')]) {
+                        sh "${vercelExecutable} --token ${VERCEL_TOKEN} --prod"
+                    }
 
                     // Get the deployment URL
                     def deploymentUrl = sh(script: 'get-deployment-url-command', returnStdOut: true).trim()
