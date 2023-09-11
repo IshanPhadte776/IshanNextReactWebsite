@@ -72,27 +72,6 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // script {
-                //     echo 'Deployment..'
-
-                //     // Specify the full path to the vercel executable
-                //     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
-
-
-                //     // Specify your Vercel token
-                //     def vercelToken = "igHWhnWeM2XGycsZD29ttMf4"
-
-                //     // Run vercel login with the token
-                //     sh "${vercelExecutable} login --token ${vercelToken} --auth github"
-
-                //     // Deploy using the full path to vercel executable
-                //     sh "${vercelExecutable} --prod"
-
-                //     // Get the deployment URL
-                //     def deploymentUrl = sh(script: 'get-deployment-url-command', returnStdout: true).trim()
-                //     echo "Deployment URL: ${deploymentUrl}"
-                // }
-
 
                 script {
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
