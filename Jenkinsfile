@@ -9,7 +9,6 @@ pipeline {
     
     environment {
         NPM_CONFIG_PREFIX = "${env.WORKSPACE}/npm_global"
-        VERCEL_TOKEN = credentials('igHWhnWeM2XGycsZD29ttMf4')
 
     }
 
@@ -97,6 +96,10 @@ pipeline {
 
                 script {
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
+                        
+                    // Define the VERCEL_TOKEN variable within the script block
+                    def VERCEL_TOKEN = credentials('igHWhnWeM2XGycsZD29ttMf4')
+
                     sh "${vercelExecutable} --token ${VERCEL_TOKEN} --prod"
 
                     // Get the deployment URL
