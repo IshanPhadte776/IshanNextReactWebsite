@@ -89,9 +89,6 @@ pipeline {
                     // Write the 'expect' script to a temporary file
                     def expectScriptFile = writeFile file: 'vercel_login_expect_script', text: expectScript
 
-                    // Make the 'expect' script executable
-                    sh "chmod +x ${expectScriptFile}"
-
                     // Run the 'expect' script
                     sh "./${expectScriptFile}"
 
