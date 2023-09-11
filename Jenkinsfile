@@ -78,19 +78,11 @@ pipeline {
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
 
 
-        // Use 'expect' to automate interaction with the login prompt
-                    def expectScript = """
-                        spawn ${vercelExecutable} login
-                        expect "Log in to Vercel"
-                        send "1\r"  # Select option 1 (GitHub)
-                        expect eof
-                    """
+                    // Specify your Vercel token
+                    def vercelToken = "igHWhnWeM2XGycsZD29ttMf4"
 
-                    // Write the 'expect' script to a temporary file
-                    def expectScriptFile = writeFile file: 'vercel_login_expect_script', text: expectScript
-
-                    // Run the 'expect' script
-                    sh "./${expectScriptFile}"
+                    // Run vercel login with the token
+                    sh "${vercelExecutable} login --token ${vercelToken}"
 
                     // Deploy using the full path to vercel executable
                     sh "${vercelExecutable} --prod"
