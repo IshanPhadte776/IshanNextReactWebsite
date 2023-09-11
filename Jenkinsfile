@@ -78,16 +78,22 @@ pipeline {
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
 
 
-                    // Run vercel login and capture the output
-                    def loginOutput = sh(script: "${vercelExecutable} login", returnStdout: true).trim()
+        // Use 'expect' to automate interaction with the login prompt
+                    def expectScript = """
+                        spawn ${vercelExecutable} login
+                        expect "Log in to Vercel"
+                        send "1\r"  # Select option 1 (GitHub)
+                        expect eof
+                    """
 
-                    // Check if the login prompt contains "GitHub" and select it
-                    if (loginOutput.contains("GitHub")) {
-                        sh "echo 'github' | ${vercelExecutable} login"
-                    } else {
-                        // Handle other login options here if needed
-                        error("GitHub login option not found in the prompt.")
-                    }
+                    // Write the 'expect' script to a temporary file
+                    def expectScriptFile = writeFile file: 'vercel_login_expect_script', text: expectScript
+
+                    // Make the 'expect' script executable
+                    sh "chmod +x ${expectScriptFile}"
+
+                    // Run the 'expect' script
+                    sh "./${expectScriptFile}"
 
                     // Deploy using the full path to vercel executable
                     sh "${vercelExecutable} --prod"
