@@ -9,7 +9,8 @@ pipeline {
     
     environment {
         NPM_CONFIG_PREFIX = "${env.WORKSPACE}/npm_global"
-
+        // Use the credentialsId for your secret key or API token
+        VERCEL_TOKEN = credentials('igHWhnWeM2XGycsZD29ttMf4')
     }
 
     //These are the stages 
@@ -77,7 +78,7 @@ pipeline {
                     def vercelExecutable = "/var/lib/jenkins/workspace/PersonalNextWebsite/vercel-install/bin/vercel"
                     
                     // Use the withCredentials step to inject the VERCEL_TOKEN as an environment variable
-                    withCredentials([string(credentialsId: 'igHWhnWeM2XGycsZD29ttMf4', variable: 'VERCEL_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'igHWhnWeM2XGycsZD29ttMf4', variable: 'igHWhnWeM2XGycsZD29ttMf4')]) {
                         sh "${vercelExecutable} --token ${VERCEL_TOKEN} --prod"
                     }
 
