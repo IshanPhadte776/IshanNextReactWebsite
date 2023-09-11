@@ -82,7 +82,7 @@ pipeline {
                     def vercelToken = "igHWhnWeM2XGycsZD29ttMf4"
 
                     // Run vercel login with the token
-                    sh "${vercelExecutable} login --token ${vercelToken}"
+                    sh "${vercelExecutable} login --token ${vercelToken} --auth github"
 
                     // Deploy using the full path to vercel executable
                     sh "${vercelExecutable} --prod"
