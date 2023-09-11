@@ -80,8 +80,38 @@ pipeline {
                     // Access the VERCEL_TOKEN environment variable
                     def vercelToken = env.VERCEL_TOKEN
                     
-                    // Use the token directly in the command
-                    sh "echo -e 'Y\\nY' | ${vercelExecutable} --token ${vercelToken} --prod"
+                               // Use 'expect' to automate interaction with the login and scope prompts
+                    def expectScript = """
+                        spawn ${vercelExecutable} --token ${vercelToken} --prod
+                        expect {
+                            "Set up and deploy" {
+                                send "Y\\r"
+                                exp_continue
+                            }
+                            "Which scope do you want to deploy to?" {
+                                send "1\\r"
+                                exp_continue
+                            }
+                            eof
+                        }
+                    """
+
+                    // Write the 'expect' script to a temporary file
+                    def expectScriptFile = writeFile file: 'vercel_expect_script', text: expectScript
+
+                    // Make the 'expect' script executable
+                    sh "chmod +x ./${expectScriptFile}"
+
+                    // Echo variable values for debugging
+                    echo "Running Vercel deployment script..."
+                    echo "Vercel Token: ${vercelToken}"
+                    echo "Vercel Executable: ${vercelExecutable}"
+
+                    // Run the 'expect' script
+                    sh "./${expectScriptFile}"
+
+                    // Echo variable values for debugging
+                    echo "Vercel deployment script completed."
 
                     // Get the deployment URL
                     def deploymentUrl = sh(script: 'get-deployment-url-command', returnStdOut: true).trim()
