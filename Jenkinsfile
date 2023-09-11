@@ -81,7 +81,7 @@ pipeline {
                     def vercelToken = env.VERCEL_TOKEN
                     
                     // Use the token directly in the command
-                    sh "echo 'Y' | ${vercelExecutable} --token ${vercelToken} --prod"
+                    sh "echo -e 'Y\\nY' | ${vercelExecutable} --token ${vercelToken} --prod"
 
                     // Get the deployment URL
                     def deploymentUrl = sh(script: 'get-deployment-url-command', returnStdOut: true).trim()
