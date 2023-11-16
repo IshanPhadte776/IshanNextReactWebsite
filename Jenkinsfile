@@ -10,7 +10,7 @@ pipeline {
     environment {
         NPM_CONFIG_PREFIX = "${env.WORKSPACE}/npm_global"
         // Use the credentialsId for your secret key or API token
-        VERCEL_TOKEN = 'igHWhnWeM2XGycsZD29ttMf4' // Use your actual secret token here
+        VERCEL_TOKEN = env.VERCELTOKEN // Use your actual secret token here
     }
 
     //These are the stages 
