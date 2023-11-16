@@ -14,9 +14,10 @@ const TechnologyUsed = (props) => {
 <div className="flex flex-col items-center justify-center">
 <div className="my-4 w-full">
 <h1 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-center whitespace-nowrap overflow-hidden">
-    {props.language === "English"
+    {/* {props.language === "English"
       ? "Fais avec React, Next.js, Javascript, TailwindCSS et GithubAPI "
-      : "Created using React, Next.js, Javascript, TailwindCSS and GithubAPI"}
+      : "Created using React, Next.js, Javascript, TailwindCSS and GithubAPI"} */}
+      {"Created using React, Next.js, Javascript, TailwindCSS and GithubAPI"}
   </h1>
 
   <div className="flex justify-center mt-4">
@@ -33,10 +34,14 @@ const TechnologyUsed = (props) => {
 
   <div className="w-full grainy-background bg-gray-300 p-2 text-center">
     <h3>
-      {props.language === "English"
+      {/* {props.language === "English"
         ? "© Ishan Phadte Tous les droits sont réservés"
         : "© Ishan Phadte All rights reserved."
-      }
+      } */}
+
+      {"© Ishan Phadte All rights reserved."}
+
+
     </h3>
   </div>
 </div>
