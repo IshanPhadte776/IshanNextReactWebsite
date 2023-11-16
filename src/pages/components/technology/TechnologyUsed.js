@@ -13,7 +13,7 @@ const TechnologyUsed = (props) => {
   return (
 <div className="flex flex-col items-center justify-center">
 <div className="my-4 w-full">
-<h1 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-center whitespace-nowrap overflow-hidden">
+<h1 className="text-xl sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center whitespace-nowrap overflow-hidden">
     {/* {props.language === "English"
       ? "Fais avec React, Next.js, Javascript, TailwindCSS et GithubAPI "
       : "Created using React, Next.js, Javascript, TailwindCSS and GithubAPI"} */}
