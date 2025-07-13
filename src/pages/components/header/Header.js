@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Header = (props) => {
   return (
-<nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4 bg-white z-5">
+<nav className="fixed top-0 mb-4 left-0 w-full flex items-center justify-between p-4 bg-white z-5">
   {/* This sets up a flex container with a row layout, aligns items vertically centered, justifies the content between the start and end, and applies padding and a white background. */}
   <div className="flex items-center">
     <div

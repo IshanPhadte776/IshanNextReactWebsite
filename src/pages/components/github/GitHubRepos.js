@@ -172,94 +172,68 @@ const GithubRepos = (props) => {
       
 
   return (
-    <div className=" rounded-md p-4 bg-gray-100 ">
-      <div className="flex flex-row">
-        <div className="w-3/5">
+    <div className="rounded-xl p-8 bg-white/80 shadow-2xl max-w-5xl mx-auto mt-8">
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="md:w-2/5 flex flex-col items-center justify-center">
           <PieChart data={data} onSliceHover={handleSliceHover} />
-        </div>
-
-        <div className="flex flex-col w-2/5 pr-4">
-          <div className="flex flex-col space-y-4">
-            <div className="flex space-x-4">
-              <h2 className="text-2xl font-bold">
-                My GitHub Repositories
-              </h2>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <GithubStats> </GithubStats>
-
-              <h3>Language Highlighted: {highlightedLanguage}</h3>
-              <h3> Number of Projects: {numOfProjects}</h3>
-            </div>
+          <div className="mt-4 text-center">
+            <h3 className="text-lg font-semibold text-primary-700">{highlightedLanguage || 'Language Highlighted'}</h3>
+            <p className="text-gray-600">{numOfProjects ? `${numOfProjects} Project(s)` : 'Number of Projects'}</p>
           </div>
         </div>
-      </div>
-
-      <div className="flex h-12 px-6">
-        <div className="flex justify-between w-full">
-          <input
-            type="text"
-            value={searchLanguage}
-            onChange={handleLanguageChange}
-            placeholder="What are you interested in?"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
-          />
-          <div className="h-full flex-grow space-x-8">
-            <button
-              onClick={clearFilters}
-              className="flex-grow h-full px-12 bg-gray-300 text-gray-700 rounded whitespace-nowrap"
-            >
-              Clear Filters
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <p>{currentTime}</p>
-
-      <div className="mt-4">
-        {loading ? (
-          <p>Loading repositories...</p>
-        ) : (
-          <ul className="mt-4 space-y-4">
-            {displayRepos.map((repo) => (
-              <li
-                key={repo.id}
-                className={`flex items-start cursor-pointer rounded p-2 mt-2 border-4 transition-all duration-300 ${
-                  repo.id === hoveredRepo
-                    ? "border-CFBFFF shadow-lg"
-                    : "border-gray-100"
-                } mx-auto `}
-                style={{ width: "60%" }} // Add this line to set the width
-                onClick={() => window.open(repo.html_url, "_blank")}
-                onMouseEnter={() => handleMouseEnter(repo.id)}
-                onMouseLeave={handleMouseLeave}
+        <div className="md:w-3/5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+            <h2 className="text-2xl font-bold text-gray-900">My GitHub Repositories</h2>
+            <div className="flex gap-2 w-full md:w-auto">
+              <input
+                type="text"
+                value={searchLanguage}
+                onChange={handleLanguageChange}
+                placeholder="Search by language, name, or topic..."
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-300 focus:outline-none bg-white text-gray-900"
+              />
+              <button
+                onClick={clearFilters}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
               >
-                <span className="mr-2">&#8226;</span>
-                <div className="flex-1">
-                  <h3 className="font-bold underline text-8677E6">
-                    {repo.name}
-                  </h3>
-                  <div className="text-lg text-gray-800">
-                    {repo.description}
-                  </div>
-                  <div className="text-md text-gray-700"> Repo Created: {convertDate(repo.created_at)}</div>
-                  {repo.topics && repo.topics.length > 0 && (
-                    <div className="ml-4">
-                      <span className="text-lg text-gray-800 font-semibold">Topics: </span>
-                      {repo.topics.map((topic, index) => (
-                        <React.Fragment key={topic}>
-                          {index > 0 && ", "}
-                          {capitalizeFirstLetter(topic)}
-                        </React.Fragment>
+                Clear
+              </button>
+            </div>
+          </div>
+          <div className="space-y-6">
+            {loading ? (
+              <p>Loading repositories...</p>
+            ) : (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {displayRepos.map((repo) => (
+                  <li
+                    key={repo.id}
+                    className={`group cursor-pointer rounded-xl border-2 transition-all duration-300 bg-white/90 hover:shadow-xl hover:border-primary-400 focus-within:border-primary-500 p-5 flex flex-col gap-2 ${repo.id === hoveredRepo ? 'ring-2 ring-primary-300' : 'border-gray-200'}`}
+                    onClick={() => window.open(repo.html_url, "_blank")}
+                    onMouseEnter={() => handleMouseEnter(repo.id)}
+                    onMouseLeave={handleMouseLeave}
+                    tabIndex={0}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="block w-2 h-2 rounded-full bg-primary-400"></span>
+                      <h3 className="font-bold text-lg text-primary-700 group-hover:underline">{repo.name}</h3>
+                    </div>
+                    <p className="text-gray-700 text-sm line-clamp-2 min-h-[2.5em]">{repo.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {repo.topics && repo.topics.length > 0 && repo.topics.map((topic, index) => (
+                        <span key={topic} className="bg-primary-50 text-primary-700 px-2 py-1 rounded-full text-xs font-medium border border-primary-100">{capitalizeFirstLetter(topic)}</span>
                       ))}
                     </div>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+                    <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
+                      <span>{repo.language}</span>
+                      <span>Created: {convertDate(repo.created_at)}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

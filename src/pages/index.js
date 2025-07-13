@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { FaCaretUp } from "react-icons/fa";
 import GithubRepos from "./components/github/GitHubRepos";
 import TechnologyUsed from "./components/technology/TechnologyUsed";
-import VerticalComponent from "./components/sideBar/VerticalComponent";
+// import VerticalComponent from "./components/sideBar/VerticalComponent"; // Removed
 import axios from "axios";
 
 import Hero from "./components/hero/Hero";
@@ -104,44 +104,26 @@ export default function Home({repos}) {
         <title>Ishan React Website</title>
       </Head>
 
-      {!isSmallScreen ? (
-        <div className="min-h-screen grid grid-cols-4">
-          <div className="col-span-1">
-            <VerticalComponent
-              language={language}
-              onLanguageChange={handleLanguageChange}
-            />
-          </div>
-          <div className="col-span-3">
-            <Hero> </Hero>
-            <span
-              onClick={scrollToTop}
-              className="fixed bottom-4 right-4 z-50 p-3 text-C8C8FA text-8xl hover:text-929BE5  hover:cursor-pointer transition-colors duration-300"
-            >
-              &#9650;
-            </span>
-            {!loading ? (
-              <GithubRepos repos={repos} />
-            ) : (
-              <p>Loading repositories...</p>
-            )}
-            <TechnologyUsed language={language}></TechnologyUsed>
-          </div>
-        </div>
-      ) : (
-        <div className="min-h-screen">
-          <Hero> </Hero>
-          <span
-            onClick={scrollToTop}
-            className="fixed bottom-4 right-4 z-50 p-3 text-C8C8FA text-4xl hover:text-929BE5 hover:cursor-pointer transition-colors duration-300"
-          >
+      <div className="min-h-screen w-full">
+        <Hero />
+        <button
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-white/80 backdrop-blur shadow-2xl border border-gray-200 hover:bg-primary-500 hover:text-white transition-all duration-300 group"
+          style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}
+        >
+          <span className="text-3xl text-primary-700 group-hover:text-white transition-colors duration-300">
             &#9650;
           </span>
+        </button>
+        {!loading ? (
+          <GithubRepos repos={repos} />
+        ) : (
+          <p>Loading repositories...</p>
+        )}
+        <TechnologyUsed language={language} />
+      </div>
 
-              <TechnologyUsed language={language} />
-
-        </div>
-      )}
     </>
   );
 }

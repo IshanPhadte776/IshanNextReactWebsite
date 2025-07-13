@@ -14,20 +14,20 @@ const GithubStats = () => {
     return formattedStartDate;
   };
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await axios.get('https://api.github.com/users/IshanPhadte776', {
+  // useEffect(() => {
+  //   const fetchStats = async () => {
+  //     try {
+  //       const response = await axios.get('https://api.github.com/users/IshanPhadte776', {
 
-        });
-        setStats(response.data);
-      } catch (error) {
-        console.error('Error fetching GitHub stats:', error);
-      }
-    };
+  //       });
+  //       setStats(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching GitHub stats:', error);
+  //     }
+  //   };
 
-    fetchStats();
-  }, []);
+  //   fetchStats();
+  // }, []);
 
   if (!stats) {
     return <div>Loading...</div>;

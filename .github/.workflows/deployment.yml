@@ -1,0 +1,12 @@
+name: CI/CD Deployment Pipeline
+
+on:
+  push:
+    branches:
+      push: main 
+
+
+jobs:
+  build:
+    runs-on:
+      ubuntu:latest

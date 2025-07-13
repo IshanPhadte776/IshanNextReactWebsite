@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import profilePic from "./profilePicture.png";
-import backgroundGif from "./backgroundGif.gif";
 
 function Hero() {
   const [screenSize, setScreenSize] = useState("");
@@ -22,69 +21,70 @@ function Hero() {
     return () => {
       mediaQuery.removeListener(handleMediaQueryChange);
     };
-  }, [screenSize,setScreenSize]);
+  }, [screenSize, setScreenSize]);
 
   return (
-    <div className="relative">
-      {/* <img
-        src="https://media.giphy.com/media/BA8S1tDfyHOkU/giphy.gif"
-        //src= {backgroundGif}
-
-        alt="GIF"
-        className="w-full h-auto aspect-w-1 aspect-h-1 filter brightness-50"
-      /> */}
-
-      <Image
-      src= "https://media.giphy.com/media/BA8S1tDfyHOkU/giphy.gif"
-      className="w-full h-auto aspect-w-1 aspect-h-1 filter brightness-50"
-      width={1}
-      height={1}
-      alt = "backgroundImage"
-      ></Image> 
-
-      <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center text-white p-1">
-        <div className="max-w-2xl mx-auto">
-          {" "}
-          {/* Adjusted max width */}
-          <div className="flex justify-center">
-            <Image
-              src={profilePic}
-              className="w-1/4 xs:w-1/5 sm:w-1/4 md:w-2/5 lg:w-3/5"
-              alt="pfpPic"
-            />
-          </div>
-          <h1 className="text-4xl font-bold text-center mt-1">Ishan Phadte</h1>
-          <div className="text-lg text-justify">
-            <div className="mb-2">
-              <p>
-                Hello, My name is Ishan Phadte. I am a 3rd-year Computer Science
-                student at the University of Ottawa. I am a great software
-                engineer because I possess exceptional problem-solving skills.
+    <div className="relative w-full">
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 to-gray-900/90"></div>
+      <div className="relative z-10 flex flex-col justify-center items-center text-white px-4 py-16 w-full">
+        <div className="grid lg:grid-cols-[2fr,3fr] gap-12 items-center w-full">
+          <div className="text-center lg:text-left space-y-8">
+            <div className="flex justify-center lg:justify-start">
+              <Image
+                src={profilePic}
+                className="w-48 h-48 rounded-full border-4 border-secondary-400/50 shadow-xl"
+                alt="Profile Picture"
+                priority
+              />
+            </div>
+            <div className="space-y-4">
+              <h1 className="text-5xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-secondary-300">
+                Ishan Phadte
+              </h1>
+              <p className="text-xl text-gray-300 font-medium">
+                Full-Stack Developer • AWS Cloud Practitioner
               </p>
             </div>
-            <div className="mb-2">
-              <p>
-                I am specialized in Full-Stack Development and Cloud Computing.
-                I have created various full-stack projects such as this React
-                Website. I am also an AWS Certified Cloud Practitioner and have
-                developed a Chatbot using various cloud services. Additionally,
-                I have done freelancing work for a small business where I
-                developed a website to display content and send email
-                notifications.
-              </p>
-            </div>
-            <div className="flex justify-center">
+            <div className="flex gap-4 justify-center lg:justify-start">
               <button
-                className="bg-transparent border border-white rounded-full py-2 px-4 text-white hover:bg-white hover:text-gray-800 transition-colors duration-300 mx-auto"
                 onClick={() =>
                   window.open(
                     "https://github.com/IshanPhadte776/IshanPhadte776/blob/main/IshanPhadteResume.pdf",
                     "_blank"
                   )
                 }
+                className="bg-secondary-600 hover:bg-secondary-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 shadow-lg shadow-secondary-600/25"
               >
-                Resume
+                View Resume
               </button>
+              <button
+                onClick={() => (window.location.href = "mailto:ishanphadte@gmail.com")}
+                className="bg-gray-800 hover:bg-gray-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
+              >
+                Contact Me
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-gray-800/50 backdrop-blur rounded-2xl p-8 shadow-xl">
+            <div className="space-y-6 text-gray-200">
+              <p className="text-lg leading-relaxed">
+                Hello! I'm a 3rd-year Computer Science student at the University of Ottawa with a passion for building innovative solutions. My expertise lies in Full-Stack Development and Cloud Computing.
+              </p>
+              <p className="text-lg leading-relaxed">
+                I've developed multiple full-stack applications, including this React website, and hold an AWS Cloud Practitioner certification. My experience includes creating a sophisticated Chatbot using AWS services and freelancing for businesses to develop custom web solutions.
+              </p>
+              <div className="pt-4 border-t border-gray-700">
+                <h3 className="text-primary-300 font-semibold mb-3">Technical Skills</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["React", "Next.js", "TypeScript", "Node.js", "AWS", "TailwindCSS", "Vercel (Hosting)"]
+                    .map(skill => (
+                    <span key={skill} className="px-3 py-1 bg-gray-700/50 rounded-full text-sm text-gray-300">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
