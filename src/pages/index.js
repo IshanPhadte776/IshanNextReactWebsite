@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { FaCaretUp } from "react-icons/fa";
 import GithubRepos from "./components/github/GitHubRepos";
+import NewGithubSection from "./components/github/NewGithubSection";
 import TechnologyUsed from "./components/technology/TechnologyUsed";
 // import VerticalComponent from "./components/sideBar/VerticalComponent"; // Removed
 import axios from "axios";
@@ -44,6 +45,8 @@ export default function Home({repos}) {
   const [language, setLanguage] = useState("English");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [loading, setLoading] = useState(true);
+  // Feature flag for new GitHub section
+  const [showNewGithubSection] = useState(true); // Set to false to show old section
 
   const scrollToTop = () => {
     const scrollDuration = 500; // Duration of the scroll animation in milliseconds
@@ -117,7 +120,11 @@ export default function Home({repos}) {
           </span>
         </button>
         {!loading ? (
-          <GithubRepos repos={repos} />
+          showNewGithubSection ? (
+            <NewGithubSection />
+          ) : (
+            <GithubRepos repos={repos} />
+          )
         ) : (
           <p>Loading repositories...</p>
         )}

@@ -172,7 +172,7 @@ const GithubRepos = (props) => {
       
 
   return (
-    <div className="rounded-xl p-8 bg-white/80 shadow-2xl max-w-5xl mx-auto mt-8">
+    <section className="w-full max-w-6xl mx-auto mt-12 px-2 md:px-6">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="md:w-2/5 flex flex-col items-center justify-center">
           <PieChart data={data} onSliceHover={handleSliceHover} />
@@ -182,8 +182,8 @@ const GithubRepos = (props) => {
           </div>
         </div>
         <div className="md:w-3/5">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-            <h2 className="text-2xl font-bold text-gray-900">My GitHub Repositories</h2>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+            <h2 className="text-3xl font-bold text-gray-900 tracking-tight">GitHub Projects</h2>
             <div className="flex gap-2 w-full md:w-auto">
               <input
                 type="text"
@@ -204,11 +204,11 @@ const GithubRepos = (props) => {
             {loading ? (
               <p>Loading repositories...</p>
             ) : (
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {displayRepos.map((repo) => (
                   <li
                     key={repo.id}
-                    className={`group cursor-pointer rounded-xl border-2 transition-all duration-300 bg-white/90 hover:shadow-xl hover:border-primary-400 focus-within:border-primary-500 p-5 flex flex-col gap-2 ${repo.id === hoveredRepo ? 'ring-2 ring-primary-300' : 'border-gray-200'}`}
+                    className={`group cursor-pointer rounded-2xl border border-gray-200 bg-white/95 hover:shadow-2xl hover:border-primary-400 transition-all duration-300 p-6 flex flex-col gap-2 relative focus-within:ring-2 focus-within:ring-primary-300 ${repo.id === hoveredRepo ? 'ring-2 ring-primary-300' : ''}`}
                     onClick={() => window.open(repo.html_url, "_blank")}
                     onMouseEnter={() => handleMouseEnter(repo.id)}
                     onMouseLeave={handleMouseLeave}
@@ -216,7 +216,12 @@ const GithubRepos = (props) => {
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="block w-2 h-2 rounded-full bg-primary-400"></span>
-                      <h3 className="font-bold text-lg text-primary-700 group-hover:underline">{repo.name}</h3>
+                      <h3 className="font-bold text-lg text-primary-700 group-hover:underline truncate max-w-[70%]">{repo.name}</h3>
+                      {repo.stargazers_count > 0 && (
+                        <span className="ml-auto flex items-center gap-1 text-yellow-500 text-xs font-semibold bg-yellow-100 px-2 py-0.5 rounded-full">
+                          ★ {repo.stargazers_count}
+                        </span>
+                      )}
                     </div>
                     <p className="text-gray-700 text-sm line-clamp-2 min-h-[2.5em]">{repo.description}</p>
                     <div className="flex flex-wrap gap-2 mt-2">
@@ -235,7 +240,7 @@ const GithubRepos = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

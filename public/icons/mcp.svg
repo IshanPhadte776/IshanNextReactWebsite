@@ -1,0 +1,5 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="4" width="20" height="16" rx="4" fill="#6366f1"/>
+  <rect x="5" y="7" width="14" height="10" rx="2" fill="#a5b4fc"/>
+  <text x="12" y="15" text-anchor="middle" fill="#fff" font-size="6" font-family="Arial" dy=".3em">MCP</text>
+</svg>
